@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://0.0.0.0:5266");
+
 // Lägg till den DbContext ni skapar för er databas här
 builder.Services.AddDbContext<WeatherDbContext>(options =>
    options.UseSqlite("Data Source=weatherapi.db"));
@@ -36,36 +38,9 @@ app.MapControllers();
 
 app.UseHttpsRedirection();
 
-var positiveSums = new[]
-{
-    "Ljummet", "Varmt", "Stekande", "Blåsigt", "Molnigt", "Soligt"
-};
-var negativesums = new[]
-{
-    "Frysande", "Bracing", "Chilly", "Cool", "Blåsigt", "Molnigt", "Soligt"
-};
-
-// app.MapGet("/weatherforecast", () =>
-// {
-//     var forecast = Enumerable.Range(1, 5).Select(index =>
-//         new WeatherForecast
-//         (
-//             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//             Random.Shared.Next(-20, 55),
-//             summaries[Random.Shared.Next(summaries.Length)]
-//         ))
-//         .ToArray();
-//     return forecast;
-// })
-// .WithName("GetWeatherForecast");
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 app.Run();
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

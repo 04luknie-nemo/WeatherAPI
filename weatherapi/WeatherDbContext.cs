@@ -2,7 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 public class WeatherDbContext : DbContext
 {
-    public WeatherDbContext(DbContextOptions<WeatherDbContext> options) : base(options) { }
+    public WeatherDbContext(DbContextOptions<WeatherDbContext> options)
+        : base(options) { }
 
     public DbSet<WeatherInfo> WeatherInfos => Set<WeatherInfo>();
 }

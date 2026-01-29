@@ -6,6 +6,6 @@ public class WeatherInfo
     public required string Description { get; set; }
     public required int WindSpeedMS { get; set; }
     public required string City { get; set; }
-    public required string Longitud { get; set; }
-    public required string Latitud { get; set; }
+    public required string Longitude { get; set; }
+    public required string Latitude { get; set; }
 }

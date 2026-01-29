@@ -5,72 +5,45 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/weather")]
 public class WeatherController : ControllerBase
 {
+    List<string> WinterFantasyWeather = new List<string> { "Isdimma", "Frostnatt", "Snöstorm", "Glittrande snö", "Klar vinterdag" };
+    List<string> WarmWeatherDescriptions = new List<string> { "Soligt", "Lätt molnighet", "Regnskur", "Halvklart", "Varm sommardag" };
 
     [HttpGet]
     public async Task<IActionResult> GetCityLongLat([FromQuery] string? city)
     {
         using var httpClient = new HttpClient();
 
-        // // Anropa en annan API
-        // CityInfo? response = await httpClient.GetFromJsonAsync<CityInfo>($"http://10.27.3.115:5171/api/v1/location/{city}");
+        // Anropa en annan API
+        CityInfo? response = await httpClient.GetFromJsonAsync<CityInfo>($"http://10.27.1.168:5171/api/v1/location?city={city.ToLower()}");
 
-        if (city == "Stockholm")
-        {
-            WeatherInfo weatherInfo = new()
-            {
-                Id = 100,
-                City = city,
-                TempC = 10,
-                WindSpeedMS = 20,
-                Description = "Soligt",
-                Longitud = "18.0649",
-                Latitud = "59.3326",
-                Date = DateOnly.FromDateTime(DateTime.Now)
-            };
-            return Ok(weatherInfo);
-        }
+        var temp = Random.Shared.Next(-10, 30);
+        var Desc = "";
+
+        if (temp <= 0)
+            Desc = WinterFantasyWeather[Random.Shared.Next(0, WinterFantasyWeather.Count)];
         else
+            Desc = WarmWeatherDescriptions[Random.Shared.Next(0, WarmWeatherDescriptions.Count)];
+
+        // if (!db.WeatherInfos.Any())
+        // {
+
+        // }
+        WeatherInfo weatherInfo = new()
         {
-            WeatherInfo weatherInfoGävle = new()
-            {
-                Id = 101,
-                City = city,
-                TempC = -20,
-                WindSpeedMS = 2,
-                Description = "Kallt",
-                Longitud = "44.4321",
-                Latitud = "54.1245",
-                Date = DateOnly.FromDateTime(DateTime.Now)
-            };
-            return Ok(weatherInfoGävle);
-        }
-        // Console.WriteLine("Fått svar");
-        // var latitud = ;
-        // var longitud = ;
-
+            City = city,
+            TempC = temp,
+            WindSpeedMS = Random.Shared.Next(0, 20),
+            Description = Desc,
+            Longitude = response.Longitude,
+            Latitude = response.Latitude,
+            Date = DateOnly.FromDateTime(DateTime.Now)
+        };
+        // db.WeatherInfos.Add(weatherInfo);
+        // await db.SaveChangesAsync();
+        return Ok(weatherInfo);
     }
-    // [HttpGet]
-    // public async Task<IActionResult> GetCityByName([FromQuery] string? city)
-    // {
-    //     var getCity = await _db.Locations.FirstOrDefaultAsync(c => c.City.ToLower() == city.ToLower());
-    //     if (getCity == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     return Ok(getCity);
-    // }
-
 }
-public record CityInfo(string Country, string Region, string City, string Latitud, string Longitud);
-
-// {
-//     "id": 1,
-//     "country": "Sweden",
-//     "region": "Stockholm",
-//     "city": "Stockholm",
-//     "latitude": "59.3294",
-//     "longitude": "18.0686"
-//   },
+public record CityInfo(string Country, string Region, string City, string Latitude, string Longitude);
 
 // Get from website/city
 // Get till location/weather?city=Borås

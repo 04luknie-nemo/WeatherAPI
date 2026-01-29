@@ -3,9 +3,10 @@
 GET {{weatherapi_HostAddress}}/weatherforecast/
 Accept: application/json
 
+// Vår
 ###
-Get http://localhost:5266/api/weather/?city=Stockholmdd
+Get http://10.27.1.180:5266/api/weather/?city=Umeå
 ###
 
-
+// Hämta från filip, daniel, elisa
 Get http://10.27.1.168:5171/api/v1/location?city=stockholm

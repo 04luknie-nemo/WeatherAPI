@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Lägg till den DbContext ni skapar för er databas här
-// builder.Services.AddDbContext<ApiDbContext>(options =>
-//    options.UseInMemoryDatabase("EventDb"));
+builder.Services.AddDbContext<WeatherDbContext>(options =>
+   options.UseSqlite("Data Source=weatherapi.db"));
 
 //Låt detta vara kvar! Utan denna inställning kommer inte websidan att få access till API:et.
 // Läs mer här: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
@@ -28,13 +28,13 @@ app.MapControllers();
 
 app.UseHttpsRedirection();
 
-var positivesums = new[]
+var positiveSums = new[]
 {
-    "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Ljummet", "Varmt", "Stekande", "Blåsigt", "Molnigt", "Soligt"
 };
 var negativesums = new[]
 {
-    "Frysande", "Bracing", "Chilly", "Cool"
+    "Frysande", "Bracing", "Chilly", "Cool", "Blåsigt", "Molnigt", "Soligt"
 };
 
 app.MapGet("/weatherforecast", () =>

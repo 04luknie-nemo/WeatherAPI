@@ -7,7 +7,6 @@ builder.Services.AddDbContext<WeatherDbContext>(options =>
    options.UseSqlite("Data Source=weatherapi.db"));
 
 builder.Services.AddControllers();
-builder.Services.AddHttpClient();
 
 //Låt detta vara kvar! Utan denna inställning kommer inte websidan att få access till API:et.
 // Läs mer här: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS

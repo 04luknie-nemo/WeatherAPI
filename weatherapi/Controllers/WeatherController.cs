@@ -5,17 +5,11 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/weather")]
 public class WeatherController : ControllerBase
 {
-    public readonly IHttpClientFactory httpClient;
-
-    public WeatherController(IHttpClientFactory httpClient)
-    {
-        this.httpClient = httpClient;
-    }
 
     [HttpGet]
     public async Task<IActionResult> GetCityLongLat([FromQuery] string? city)
     {
-        // using var httpClient = new HttpClient();
+        using var httpClient = new HttpClient();
 
         // // Anropa en annan API
         // CityInfo? response = await httpClient.GetFromJsonAsync<CityInfo>($"http://10.27.3.115:5171/api/v1/location/{city}");

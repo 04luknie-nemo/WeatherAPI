@@ -4,7 +4,7 @@ GET {{weatherapi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
-Get http://localhost:5266/api/weather/?city=Stockholm
+Get http://localhost:5266/api/weather/?city=Stockholmdd
 ###
 
 

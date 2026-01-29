@@ -4,3 +4,8 @@ GET {{weatherapi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+Get http://localhost:5266/api/weather/?city=Stockholm
+###
+
+
+Get http://10.27.1.168:5171/api/v1/location?city=stockholm

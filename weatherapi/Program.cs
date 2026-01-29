@@ -36,7 +36,7 @@ app.UseCors();
 //Ni ska inte skriva era endpoints här i Program.cs utan i separata controllers, så använd denna:
 app.MapControllers();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

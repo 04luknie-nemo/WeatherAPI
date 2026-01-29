@@ -5,7 +5,7 @@ Accept: application/json
 
 // Vår
 ###
-Get http://10.27.1.180:5266/api/weather/?city=Umeå
+Get http://10.27.1.180:5266/api/weather/?city=Gävle
 ###
 
 // Hämta från filip, daniel, elisa
